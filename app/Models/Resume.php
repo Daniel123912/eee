@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Resume extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
         'headline',
         'description',
@@ -25,8 +26,9 @@ class Resume extends Model
         'instagram',
         'youtube',
     ];
-    public function user()
+
+    public function resume()
     {
-        return $this ->hasOne(User::class);
+        return $this->belongsTo(User::class); // 'user_id' - это имя столбца в таблице resumes, связывающее с таблицей users
     }
 }

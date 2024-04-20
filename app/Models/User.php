@@ -54,6 +54,6 @@ class User extends Authenticatable
     }
     public function resume()
     {
-        return $this ->hasOne(Resume::class)
+        return $this->hasOne(Resume::class);
     }
 }

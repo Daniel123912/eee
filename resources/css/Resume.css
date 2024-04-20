@@ -1,0 +1,131 @@
+/* Общий стиль для контейнера формы */
+.resume-form-container {
+    padding: 20px;
+  }
+  
+  /* Стили для заголовка формы */
+  .resume-form-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Стили для каждой строки формы */
+  .resume-form-row {
+    margin-bottom: 20px;
+  }
+  
+  /* Стили для меток полей формы */
+  .resume-form-label {
+    font-weight: bold;
+  }
+  
+  /* Стили для полей ввода текста */
+  .resume-form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Стили для текстовых областей формы */
+  .resume-form-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Стили для кнопки отправки формы */
+  .resume-form-submit-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Стили для кнопки отправки формы при наведении */
+  .resume-form-submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Стили для кнопки отправки формы при активации */
+  .resume-form-submit-btn:active {
+    background-color: #004080;
+  }
+  /* Header styles */
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  padding: 20px 0;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  max-height: 50px;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.nav-link {
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+.user-login .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: 500;
+}
+
+.user-login .btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu-right {
+  right: 0;
+}
+
+.dropdown-item {
+  color: #333;
+  font-weight: 400;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+#avatar{
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 767px) {
+  .navbar-nav {
+    margin-top: 10px;
+  }
+}
+
+  
