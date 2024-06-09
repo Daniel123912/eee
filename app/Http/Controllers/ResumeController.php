@@ -2,42 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Resume as RequestsResume;
 use Illuminate\Http\Request;
-use App\Models\Resume; 
+use App\Models\Resume;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class ResumeController extends Controller
 {
-    public function store(Request $request)
+    public function store(RequestsResume $request)
     {
-        // Validate the form data
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'headline' => 'required|string',
-            'description' => 'nullable|string',
-            'location' => 'nullable|string',
-            'website' => 'nullable|url',
-            'salary' => 'nullable|numeric',
-            'age' => 'nullable|integer',
-            'phone' => 'nullable|string',
-            'email' => 'nullable|email',
-            'facebook' => 'nullable|url',
-            'google_plus' => 'nullable|url',
-            'dribbble' => 'nullable|url',
-            'pinterest' => 'nullable|url',
-            'twitter' => 'nullable|url',
-            'github' => 'nullable|url',
-            'instagram' => 'nullable|url',
-            'youtube' => 'nullable|url',
-        ]);
-        
 
         
-        $resume = new Resume();
-        $resume->fill($validatedData);
+        // Валидация данных формы    $validated = $request->validate([
+            $validated = $request->validated();
 
-    
-        $resume->save();
-        
-        return redirect()->back()->with('success', 'Resume submitted successfully!');
+          // Создание резюме
+          Resume::create(array_merge($validated, ['user_id' => auth()->id()]));   
+        return Redirect::route('home');
+        // Перенаправляем пользователя с сообщением об успешном сохранении
+        // return redirect()->back()->with('success', 'Резюме успешно добавлено!');
     }
 }
+

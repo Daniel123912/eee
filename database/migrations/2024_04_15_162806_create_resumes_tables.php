@@ -13,24 +13,22 @@ return new class extends Migration
     {
         Schema::create('resumes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('name');
-            $table->string('headline');
-            $table->text('description')->nullable();
-            $table->string('location')->nullable();
-            $table->string('website')->nullable();
-            $table->decimal('salary', 10, 2)->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('full_name');
+            $table->string('contact_info')->nullable();
+            $table->string('city')->nullable();
+            $table->text('professional_goal')->nullable();
+            $table->text('education')->nullable();
+            $table->text('work_experience')->nullable();
+            $table->text('skills')->nullable();
+            $table->text('courses')->nullable();
+            $table->text('languages')->nullable();
+            $table->text('additional_info')->nullable();
+            $table->integer('salary')->nullable();
             $table->integer('age')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('google_plus')->nullable();
-            $table->string('dribbble')->nullable();
-            $table->string('pinterest')->nullable();
-            $table->string('twitter')->nullable();
             $table->string('github')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('youtube')->nullable();
             $table->timestamps();
         });
     }

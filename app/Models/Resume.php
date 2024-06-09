@@ -2,33 +2,33 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Resume extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'user_id',
-        'name',
-        'headline',
-        'description',
-        'location',
-        'website',
+        'full_name',
+        'contact_info',
+        'city',
+        'professional_goal',
+        'education',
+        'work_experience',
+        'skills',
+        'courses',
+        'languages',
+        'additional_info',
         'salary',
         'age',
         'phone',
         'email',
-        'facebook',
-        'google_plus',
-        'dribbble',
-        'pinterest',
-        'twitter',
         'github',
-        'instagram',
-        'youtube',
     ];
-
-    public function resume()
+    public function user()
     {
-        return $this->belongsTo(User::class); // 'user_id' - это имя столбца в таблице resumes, связывающее с таблицей users
+        return $this->belongsTo(User::class);
     }
 }
+

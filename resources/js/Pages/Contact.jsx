@@ -7,8 +7,7 @@ export default function Contact({auth}) {
   {/* Site header */}
   <header
     className="page-header bg-img size-lg"
-    style={{ backgroundImage: 'url(storage/upload/bg-banner2.jpg)' }}
-  >
+    style={{ backgroundImage: 'url(storage/upload/bg-banner2.jpg)' }}>
     <div className="container no-shadow">
       <h1 className="text-center">Contact us</h1>
       <p className="lead text-center">

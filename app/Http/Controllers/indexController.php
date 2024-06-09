@@ -43,6 +43,9 @@ class indexController extends Controller
     public function resume(){
         return Inertia::render('Resume');
     }
+    public function addvacancyform(){
+        return Inertia::render('Addvacancyform');
+    }
     public function home()
     {
         return Inertia::render(

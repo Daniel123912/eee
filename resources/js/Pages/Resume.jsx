@@ -1,685 +1,227 @@
 import DefaultLayout from '@/Components/compon/DefaultLayout'
-import React from 'react'
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useForm } from '@inertiajs/inertia-react';
 
 export default function Resume({auth}) {
+  const [message, setMessage] = useState("");
+  const { data, setData, errors, post } = useForm({
+    full_name: '',
+    // contactInfo: '',
+    // city: '',
+    // professionalGoal: '',
+    // education: '',
+    // workExperience: '',
+    // skills: '',
+    // courses: '',
+    // languages: '',
+    // additionalInfo: '',
+    // salary: '',
+    // age: '',
+    // phone: '',
+    // email: '',
+    // github: '',
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    post(route('resumes.store'), {
+      onSuccess: () => setMessage("Резюме добавлено"),
+      onError: () => setMessage("Не удалось добавить резюме"),
+    });
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData(name, value);
+  }
+
   return (
     <DefaultLayout auth={auth}>
-      <form className='resumeForm' >
-  <header className="page-header">
-    <div className="container page-name">
-      <h1 className="text-center">Add your resume</h1>
-      <p className="lead text-center">Create your resume and put it online.</p>
-    </div>
-    <div className="container">
-      <div className="row">
-        <div className="col-xs-12 col-sm-4">
-          <div className="form-group">
-            <input
-              type="file"
-              className="dropify"
-              data-default-file="assets/img/avatar.jpg"
-            />
-            <span className="help-block">
-              Please choose a 4:6 profile picture.
-            </span>
-          </div>
-        </div>
-        <div className="col-xs-12 col-sm-8">
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control input-lg"
-              placeholder="Name"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Headline (e.g. Front-end developer)"
-            />
-          </div>
-          <div className="form-group">
-            <textarea
-              className="form-control"
-              rows={3}
-              placeholder="Short description about you"
-              defaultValue={""}
-            />
-          </div>
-          <hr className="hr-lg" />
-          <h6>Basic information</h6>
-          <div className="row">
-            <div className="form-group col-xs-12 col-sm-6">
-              <div className="input-group input-group-sm">
-                <span className="input-group-addon">
-                  <i className="fa fa-map-marker" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Location, e.g. Melon Park, CA"
-                />
-              </div>
-            </div>
-            <div className="form-group col-xs-12 col-sm-6">
-              <div className="input-group input-group-sm">
-                <span className="input-group-addon">
-                  <i className="fa fa-globe" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Website address"
-                />
-              </div>
-            </div>
-            <div className="form-group col-xs-12 col-sm-6">
-              <div className="input-group input-group-sm">
-                <span className="input-group-addon">
-                  <i className="fa fa-usd" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Salary, e.g. 85"
-                />
-                <span className="input-group-addon">Per hour</span>
-              </div>
-            </div>
-            <div className="form-group col-xs-12 col-sm-6">
-              <div className="input-group input-group-sm">
-                <span className="input-group-addon">
-                  <i className="fa fa-birthday-cake" />
-                </span>
-                <input type="text" className="form-control" placeholder="Age" />
-                <span className="input-group-addon">Years old</span>
-              </div>
-            </div>
-            <div className="form-group col-xs-12 col-sm-6">
-              <div className="input-group input-group-sm">
-                <span className="input-group-addon">
-                  <i className="fa fa-phone" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Phone number"
-                />
-              </div>
-            </div>
-            <div className="form-group col-xs-12 col-sm-6">
-              <div className="input-group input-group-sm">
-                <span className="input-group-addon">
-                  <i className="fa fa-envelope" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Email address"
-                />
-              </div>
-            </div>
-          </div>
-          <hr className="hr-lg" />
-          <h6>Tags list</h6>
-          <div className="form-group">
-            <input
-              type="text"
-              defaultValue="HTML,CSS,Javascript"
-              data-role="tagsinput"
-              placeholder="Tag name"
-            />
-            <span className="help-block">Write tag name and press enter</span>
-          </div>
-        </div>
-      </div>
-      <div className="button-group">
-        <div className="action-buttons">
-          <div className="upload-button">
-            <button className="btn btn-block btn-gray">
-              Choose a resume file
-            </button>
-            <input type="file" />
-          </div>
-          <div className="upload-button">
-            <button className="btn btn-block btn-primary">
-              Choose a cover image
-            </button>
-            <input id="cover_img_file" type="file" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  {/* END P
-   */}
-
-
-  {/* END Page header */}
-  {/* Main container */}
-  <main>
-    {/* Social media */}
-    <section>
-      <div className="container">
-        <header className="section-header">
-          <span>Get connected</span>
-          <h2>Social media</h2>
-        </header>
-        <div className="row">
-          <div className="col-xs-12 col-sm-6">
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-facebook" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-google-plus" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-dribbble" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-pinterest" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 col-sm-6">
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-twitter" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-github" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-instagram" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <i className="fa fa-youtube" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Profile URL"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    {/* Social media */}
-    {/* Education */}
-    <section className=" bg-alt">
-      <div className="container">
-        <header className="section-header">
-          <span>Latest degrees</span>
-          <h2>Education</h2>
-        </header>
-        <div className="row">
-          <div className="col-xs-12">
-            <div className="item-block">
-              <div className="item-form">
-                <button className="btn btn-danger btn-float btn-remove">
-                  <i className="ti-close" />
-                </button>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-4">
-                    <div className="form-group">
-                      <input
-                        type="file"
-                        className="dropify"
-                        data-default-file="assets/img/logo-default.png"
-                      />
-                      <span className="help-block">
-                        Please choose a square logo
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-8">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Degree, e.g. Bachelor"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Major, e.g. Computer Science"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="School name, e.g. Massachusetts Institute of Technology"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <div className="input-group">
-                        <span className="input-group-addon">Date from</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2012"
-                        />
-                        <span className="input-group-addon">Date to</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2016"
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <textarea
-                        className="form-control"
-                        rows={3}
-                        placeholder="Short description"
-                        defaultValue={""}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 duplicateable-content">
-            <div className="item-block">
-              <div className="item-form">
-                <button className="btn btn-danger btn-float btn-remove">
-                  <i className="ti-close" />
-                </button>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-4">
-                    <div className="form-group">
-                      <input
-                        type="file"
-                        className="dropify"
-                        data-default-file="assets/img/logo-default.png"
-                      />
-                      <span className="help-block">
-                        Please choose a square logo
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-8">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Degree, e.g. Bachelor"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Major, e.g. Computer Science"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="School name, e.g. Massachusetts Institute of Technology"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <div className="input-group">
-                        <span className="input-group-addon">Date from</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2012"
-                        />
-                        <span className="input-group-addon">Date to</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2016"
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group">
-                      <textarea
-                        className="form-control"
-                        rows={3}
-                        placeholder="Short description"
-                        defaultValue={""}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 text-center">
-            <br />
-            <button className="btn btn-primary btn-duplicator">
-              Add education
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-    {/* END Education */}
-    {/* Work Experience */}
-    <section>
-      <div className="container">
-        <header className="section-header">
-          <span>Past positions</span>
-          <h2>Work Experience</h2>
-        </header>
-        <div className="row">
-          <div className="col-xs-12">
-            <div className="item-block">
-              <div className="item-form">
-                <button className="btn btn-danger btn-float btn-remove">
-                  <i className="ti-close" />
-                </button>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-4">
-                    <div className="form-group">
-                      <input
-                        type="file"
-                        className="dropify"
-                        data-default-file="assets/img/logo-default.png"
-                      />
-                      <span className="help-block">
-                        Please choose a square logo
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-8">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Company name"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Position, e.g. UI/UX Researcher"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <div className="input-group">
-                        <span className="input-group-addon">Date from</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2012"
-                        />
-                        <span className="input-group-addon">Date to</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2016"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <textarea
-                        className="summernote-editor"
-                        defaultValue={""}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 duplicateable-content">
-            <div className="item-block">
-              <div className="item-form">
-                <button className="btn btn-danger btn-float btn-remove">
-                  <i className="ti-close" />
-                </button>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-4">
-                    <div className="form-group">
-                      <input
-                        type="file"
-                        className="dropify"
-                        data-default-file="assets/img/logo-default.png"
-                      />
-                      <span className="help-block">
-                        Please choose a square logo
-                      </span>
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-8">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Company name"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Position, e.g. UI/UX Researcher"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <div className="input-group">
-                        <span className="input-group-addon">Date from</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2012"
-                        />
-                        <span className="input-group-addon">Date to</span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="e.g. 2016"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xs-12">
-                    <div className="form-group">
-                      <textarea
-                        className="summernote-editor"
-                        defaultValue={""}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 text-center">
-            <br />
-            <button className="btn btn-primary btn-duplicator">
-              Add experience
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-    {/* END Work Experience */}
-    {/* Skills */}
-    <section className=" bg-alt">
-      <div className="container">
-        <header className="section-header">
-          <span>Expertise Areas</span>
-          <h2>Skills</h2>
-        </header>
-        <div className="row">
-          <div className="col-xs-12">
-            <div className="item-block">
-              <div className="item-form">
-                <button className="btn btn-danger btn-float btn-remove">
-                  <i className="ti-close" />
-                </button>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Skill name, e.g. HTML"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-6">
-                    <div className="form-group">
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Skill proficiency, e.g. 90"
-                        />
-                        <span className="input-group-addon">%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 duplicateable-content">
-            <div className="item-block">
-              <div className="item-form">
-                <button className="btn btn-danger btn-float btn-remove">
-                  <i className="ti-close" />
-                </button>
-                <div className="row">
-                  <div className="col-xs-12 col-sm-6">
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Skill name, e.g. HTML"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xs-12 col-sm-6">
-                    <div className="form-group">
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Skill proficiency, e.g. 90"
-                        />
-                        <span className="input-group-addon">%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-xs-12 text-center">
-            <br />
-            <button className="btn btn-primary btn-duplicator">
-              Add experience
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-    {/* END Skills */}
-    {/* Submit */}
-    <section
-      className=" bg-img"
-      style={{ backgroundImage: "url(assets/img/bg-facts.jpg)" }}
-    >
-      <div className="container">
-        <header className="section-header">
-          <span>Are you done?</span>
-          <h2>Submit resume</h2>
-          <p>
-            Please review your information once more and press the below button
-            to put your resume online.
-          </p>
-        </header>
-        <p className="text-center">
-          <button className="btn btn-success btn-xl btn-round">
-            Submit your resume
-          </button>
-        </p>
-      </div>
-    </section>
-    {/* END Submit */}
-  </main>
-  {/* END Main container */}
-</form>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col>
+            <Form.Group controlId="full_name">
+              <Form.Label>ФИО</Form.Label>
+              <Form.Control
+                type="text"
+                name="full_name"
+                value={data.full_name}
+                onChange={handleChange}
+                isInvalid={!!errors.full_name}
+              />
+              {errors.full_name && <Form.Control.Feedback type="invalid">{errors.full_name}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="contactInfo">
+              <Form.Label>Контактная информация</Form.Label>
+              <Form.Control
+                type="text"
+                name="contactInfo"
+                value={data.contactInfo}
+                onChange={handleChange}
+                isInvalid={!!errors.contactInfo}
+              />
+              {errors.contactInfo && <Form.Control.Feedback type="invalid">{errors.contactInfo}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="city">
+              <Form.Label>Город проживания</Form.Label>
+              <Form.Control
+                type="text"
+                name="city"
+                value={data.city}
+                onChange={handleChange}
+                isInvalid={!!errors.city}
+              />
+              {errors.city && <Form.Control.Feedback type="invalid">{errors.city}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="professionalGoal">
+              <Form.Label>Профессиональная цель</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="professionalGoal"
+                value={data.professionalGoal}
+                onChange={handleChange}
+                isInvalid={!!errors.professionalGoal}
+              />
+              {errors.professionalGoal && <Form.Control.Feedback type="invalid">{errors.professionalGoal}</Form.Control.Feedback>}
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="education">
+              <Form.Label>Образование</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="education"
+                value={data.education}
+                onChange={handleChange}
+                isInvalid={!!errors.education}
+              />
+              {errors.education && <Form.Control.Feedback type="invalid">{errors.education}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="workExperience">
+              <Form.Label>Опыт работы</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="workExperience"
+                value={data.workExperience}
+                onChange={handleChange}
+                isInvalid={!!errors.workExperience}
+              />
+              {errors.workExperience && <Form.Control.Feedback type="invalid">{errors.workExperience}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="skills">
+              <Form.Label>Навыки</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="skills"
+                value={data.skills}
+                onChange={handleChange}
+                isInvalid={!!errors.skills}
+              />
+              {errors.skills && <Form.Control.Feedback type="invalid">{errors.skills}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="courses">
+              <Form.Label>Курсы и сертификаты</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="courses"
+                value={data.courses}
+                onChange={handleChange}
+                isInvalid={!!errors.courses}
+              />
+              {errors.courses && <Form.Control.Feedback type="invalid">{errors.courses}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="languages">
+              <Form.Label>Языки</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="languages"
+                value={data.languages}
+                onChange={handleChange}
+                isInvalid={!!errors.languages}
+              />
+              {errors.languages && <Form.Control.Feedback type="invalid">{errors.languages}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="additionalInfo">
+              <Form.Label>Дополнительная информация</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                name="additionalInfo"
+                value={data.additionalInfo}
+                onChange={handleChange}
+                isInvalid={!!errors.additionalInfo}
+              />
+              {errors.additionalInfo && <Form.Control.Feedback type="invalid">{errors.additionalInfo}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="salary">
+              <Form.Label>Зарплата</Form.Label>
+              <Form.Control
+                type="number"
+                name="salary"
+                value={data.salary}
+                onChange={handleChange}
+                isInvalid={!!errors.salary}
+              />
+              {errors.salary && <Form.Control.Feedback type="invalid">{errors.salary}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="age">
+              <Form.Label>Возраст</Form.Label>
+              <Form.Control
+                type="number"
+                name="age"
+                value={data.age}
+                onChange={handleChange}
+                isInvalid={!!errors.age}
+              />
+              {errors.age && <Form.Control.Feedback type="invalid">{errors.age}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="phone">
+              <Form.Label>Телефон</Form.Label>
+              <Form.Control
+                type="text"
+                name="phone"
+                value={data.phone}
+                onChange={handleChange}
+                isInvalid={!!errors.phone}
+              />
+              {errors.phone && <Form.Control.Feedback type="invalid">{errors.phone}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+                isInvalid={!!errors.email}
+              />
+              {errors.email && <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>}
+            </Form.Group>
+            <Form.Group controlId="github">
+              <Form.Label>GitHub</Form.Label>
+              <Form.Control
+                type="text"
+                name="github"
+                value={data.github}
+                onChange={handleChange}
+                isInvalid={!!errors.github}
+              />
+              {errors.github && <Form.Control.Feedback type="invalid">{errors.github}</Form.Control.Feedback>}
+            </Form.Group>
+          </Col>
+        </Row>
+        <Button variant="primary" type="submit">
+          Добавить резюме
+        </Button>
+        {message && <div className="text-red-500">{message}</div>}
+      </Form>
     </DefaultLayout>
-  )
+  );
 }

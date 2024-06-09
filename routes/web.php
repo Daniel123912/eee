@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\indexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
@@ -40,9 +40,11 @@ Route::get('/pricing', [indexController::class, 'pricing'])->name('pricing');
 Route::get('/recording', [indexController::class, 'recording'])->name('recording'); //recording
 Route::get('/resume', [indexController::class, 'resume'])->name('resume');
 Route::post('/resume', [ResumeController::class, 'store'])->name('resumes.store');
+Route::get('/addvacancyform', [indexController::class, 'addvacancyform'])->name('addvacancyform');
 
 Route::get('/recording', [RegistrationController::class, 'recording'])->name('recording');
 Route::get('/companydetail', [indexController::class, 'companydetail'])->name('companydetail');
 
 
+require __DIR__ . '/admin.php';
 
